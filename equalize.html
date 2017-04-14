@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Equalize Script</title>
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<style>
+div[class*="col-"]{
+  border:#ff0000 1px solid;
+}
+</style>    
+ 
+  </head>
+  <body>
+
+
+
+
+  <div class="container">
+    <div class="row equalize">
+      <div class="col-md-4">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta nibh vitae sodales congue. Nulla non nisi et libero condimentum sagittis eu nec risus. Phasellus rhoncus fringilla ultricies. Curabitur sagittis convallis lacus quis rutrum. Nullam non volutpat odio. Cras non quam dolor. Sed sed felis vel ante posuere consequat. Vestibulum at sapien et dolor malesuada mollis vitae at lacus. Nullam egestas non lectus id ultrices. Sed nec consectetur augue. Do
+      </div><!--end col-->
+      <div class="col-md-4"></div><!--end col-->
+      <div class="col-md-4"></div><!--end col-->
+    </div><!--end row-->
+
+
+     <div class="row equalize">
+      <div class="col-md-4"></div><!--end col-->
+      <div class="col-md-4"></div><!--end col-->
+      <div class="col-md-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta nibh vitae sodales congue. Nulla non nisi et libero condimentum sagittis eu nec risus. Phasellus rhoncus fringilla ultricies. Curabitur sagittis convallis lacus quis rutrum. Nullam non volutpat odio. Cras non quam dolor. Sed sed felis vel ante posuere consequat. Vestibulum at sapien et dolor malesuada mollis vitae at lacus. Nullam egestas non lectus id ultrices. Sed nec consectetur augue. Do Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta nibh vitae sodales congue. Nulla non nisi et libero condimentum sagittis eu nec risus. Phasellus rhoncus fringilla ultricies. Curabitur sagittis convallis lacus quis rutrum. Nullam non volutpat odio. Cras non quam dolor. Sed sed felis vel ante posuere consequat. Vestibulum at sapien et dolor malesuada mollis vitae at lacus. Nullam egestas non lectus id ultrices. Sed nec consectetur augue. Do
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed porta nibh vitae sodales congue. Nulla non nisi et libero condimentum sagittis eu nec risus. Phasellus rhoncus fringilla ultricies. Curabitur sagittis convallis lacus quis rutrum. Nullam non volutpat odio. Cras non quam dolor. Sed sed felis vel ante posuere consequat. Vestibulum at sapien et dolor malesuada mollis vitae at lacus. Nullam egestas non lectus id ultrices. Sed nec consectetur augue. Do</div><!--end col-->
+    </div><!--end row-->
+       
+  </div><!--end container-->
+
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+$(".equalize").each(function(i) {
+  colHeights = [];
+  $(this).attr("data-row", i);
+  $(".row[data-row='" + i + "'] div[class*='col-']").each( function() {
+    $(this).attr("data-col", i);
+    theHeight = $(this).height();
+    colHeights.push(theHeight);
+  }); //end each
+  largest = Math.max.apply(Math, colHeights); // get largest
+  $("div[data-col='" + i + "']").css("height", largest);
+}); //end each
+</script>
+
+  </body>
+</html>
