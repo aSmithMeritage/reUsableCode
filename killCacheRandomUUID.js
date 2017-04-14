@@ -1,6 +1,6 @@
 
 
-//start randomize
+//start randomize number
 var randomizeX = function (base) {
     var d, returnValue, r;
 
