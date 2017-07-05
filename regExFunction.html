@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+<style>
+ul.noStyle > li, ul.noStyle
+{
+    list-style-type:none;
+    padding-left:0px;
+}
+
+.error
+{
+    color:#ff0000;
+}
+
+</style>
+</head>
+
+<body><!-- dd66ddd9 -->
+<div class="container">
+  <div class="row">
+   <div class="col-md-12">
+<h3>RegEx for front-end</h3>
+<p>This is a JavaScript app looks for common patterns in the "name" attribute of the input[type='text']. They don't need to be exact. There only needs to be a pattern match somewhere in the "name" to get picked up. The first section of JavaScript goes through each input[type='text'] name attribute to determines which reGex to use. Then, it applies the "data-regex" attribute which will be picked up in the next section of code where it actually runs the matching process.</p>
+<p>Unfortunately, SilverScript doesn't have much in the way of naming conventions. This is why I chose to search for patterns.</p>
+<p>For example, "TestingHereFirstNameRun" will be picked up as "firstname" via the JavaScript and the appropriate regEx will be applied.<br />
+Instead of an error being displayed, the characters which aren't allowed, are stripped out. We are currently doing this in SilverScript already, this is just easier to follow.<br />
+I have the option of "paste" disabled due to it's ability to pass through. However, if it does get through on a device, the secondary round of validation will catch the error upon submission of the form.
+</p>
+<i class="error">Open your cosole log to see how the application is running in real time.</i>
+
+
+<ul class="noStyle">
+    <li>
+        <label>City</label>
+        <input type="text" class="form-control" name="SOMETHINGhereCity" maxlength="25" id="city" onpaste="return false;" />
+    </li>
+    <li>
+        <label>First Name</label>
+        <input type="text" class="form-control" name="TestingHereFirstNameRun" maxlength="25" id="firstName" onpaste="return false;"  />
+    </li>
+    <li>
+        <label>Address</label>
+        <input type="text" class="form-control" name="somebodysADDRESShere" maxlength="50" id="address" onpaste="return false;"  />
+    </li>
+    <li>
+        <label>Postal Code</label>
+        <input type="text" class="form-control" name="manyDifferenTermsforPostalCode" maxlength="5" id="zipCode" onpaste="return false;" />
+    </li>
+    <li>
+        <label>Email</label>
+        <input type="text" class="form-control" name="letEmailPass" maxlength="40" id="email" onpaste="return false;" />
+        <i class="error">Validated elswhere in the common.js. Emails get passed by this function due to requirements.</i>
+    </li>
+    <li>
+        <label>Rx Group</label>
+        <input type="text" class="form-control" name="rxGroupPatternMatch" maxlength="10" id="rxGroup" onpaste="return false;"  />
+    </li>
+</ul>
+
+
+   </div><!--end col-->
+  </div><!--end row-->
+</div><!--end container-->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <script>
+var  ckRegExObj =[{
+    "regExNum": 0,
+    "regExList": [{
+        "nameAttr": "email"// email validation has a seperate function built elsehwere in the common.js
+    }]
+},{
+    "regExNum":1,
+	"regExList": [{
+		"nameAttr": "city"
+	}]
+}, {
+    "regExNum":2,
+	"regExList": [{
+		"nameAttr": "address"
+	}]
+}, {
+    "regExNum":3,
+	"regExList": [{
+		"nameAttr": "namefirst"
+	}, {
+		"nameAttr": "firstname"
+	}, {
+		"nameAttr": "first_name"
+	}, {
+		"nameAttr": "middleinitial"
+	}, {
+		"nameAttr": "first_name_er"
+	}, {
+		"nameAtrr": "fullname"
+	}]
+}, {
+    "regExNum":4,
+	"regExList": [{
+		"nameAttr": "namelast"
+	}, {
+		"nameAttr": "lastname"
+	}, {
+		"nameAttr": "last_name"
+	}, {
+		"nameAttr": "rxbin"
+	}, {
+		"nameAttr": "rxpcn"
+	}, {
+		"nameAttr": "last_name_er"
+	}]
+}, {
+    "regExNum":5,
+	"regExList": [{
+		"nameAttr": "institution"
+	}, {
+		"nameAttr": "rxgroup"
+	}, {
+		"nameAttr": "rxid"
+	}, {
+		"nameAttr": "acctname"
+	}, {
+		"nameAttr": "fiinst"
+	}, {
+		"nameAttr": "acctnum"
+	}]
+}, {
+    "regExNum":6,
+	"regExList": [{
+		"nameAttr": "repzipcode"
+	}, {
+		"nameAttr": "postal"
+	}, {
+		"nameAttr": "zip"
+	}, {
+		"nameAttr": "routnum"
+	}]
+}];   
+
+//apply identifiers for which regEx to use for every input[type='text']
+$(ckRegExObj).each(function () {
+    var regExNum = this.regExNum;
+    var regExList = this.regExList;
+    $(regExList).each(function () {
+        var nameAttr = this.nameAttr;
+        $("input[type='text']").each(function () {
+            var whichInput = $(this).attr("name");
+            whichInput = whichInput.toString().toLowerCase();
+            if (whichInput.indexOf(nameAttr) != -1) {
+                $(this).attr("data-regex", regExNum).attr("placeholder", "This input uses regEx: " + regExNum);
+            } //end if
+        }); //end each input
+    }); //end each
+});    //end each
+//end apply identifiers //////////////////
+//start regEx testing //////////////////
+$(document).on("keyup", "input[type='text']", function () {
+    var regExNum = $(this).attr("data-regex");
+    regExNum = parseInt(regExNum);
+    var whichId = $(this).attr("id");
+    var whichInput = $(this).attr("name");
+    whichInput = whichInput.toString().toLowerCase();
+    var txtInput = $(this).val();
+    var maxLength = $(this).attr("maxlength");
+    txtInput = txtInput.substring(0, maxLength); //max characters via javaScript for android devices
+    var passThrough = true;
+
+    if (regExNum === 0) {//7
+        console.log("This input value has a seperate function for front end validation.");
+        passThrough = false;
+        return false;
+    } //end 0// let this go first 
+    if (regExNum === 1) {//1
+        regEx = /^[a-zA-Z\s-.]*$/;
+    } //end if
+    if (regExNum === 2) {//2
+        regEx = /^[a-zA-Z0-9-\/ ]+$/;
+    } //end 3
+    if (regExNum === 3) {//3  
+        regEx = /^[A-Za-z0-9\s'"_-]+$/;
+    } //end  3
+    if (regExNum === 4) {//4
+        regEx = /^[a-zA-Z0-9]+$/;
+    } //end 4
+    if (regExNum === 5) {//5
+        regEx = /^[a-zA-Z0-9\s-.]+$/;
+    } //end 5
+    if (regExNum === 6) {//6
+        regEx = /^[0-9]+$/;
+    } //end 6
+
+    console.log("regEx " + regExNum);
+    txtLength = txtInput.length;
+    txtLength = parseInt(txtLength);
+    if (txtInput.match(regEx) != null && passThrough == true) { //validate char allowed
+        console.log("char allowed");
+    } //end if
+    if (txtInput.match(regEx) == null && passThrough == true) { //validate char not allowed
+        console.log("CHAR NOT ALLOWED! - " + whichInput);
+        var newVal = txtInput.substring(0, txtLength - 1); //take out bad characters
+        $("#" + whichId).val(newVal);
+    } //end else
+}); //end keyup
+//end regEx testing //////////////////
+
+
+
+
+    
+    </script>
+
+</body>
+
+</html>
