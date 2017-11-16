@@ -1596,7 +1596,7 @@ nav.nav--main .nav--bottom .nav--submenu {
     max-height:45px!important;
     line-height:20px!important;
 }
-    
+
 nav.nav--main .nav--bottom li.nav--menu-item.dropdown--trigger.hideNav a::before, 
 nav.nav--main .nav--bottom li.nav--menu-item.dropdown--trigger.showNav ul.vertical.nav--submenu.hideNav {
     visibility: hidden!important;
@@ -1616,7 +1616,7 @@ nav.nav--main .nav--bottom li.nav--menu-item.dropdown--trigger.showNav ul.vertic
 </style>
 <script>
 activeMain = "";
-allSubNavs = $("nav.nav--main .nav--bottom .nav--submenu, nav.nav--main .nav--bottom  li.dropdown--trigger>a:before");
+allSubNavs = $("nav.nav--main .nav--bottom .nav--submenu, nav.nav--main .nav--bottom  li.dropdown--trigger");
 $(".dropdown--trigger").each(function(i) {
     $(this).attr("data-num", i).children(".nav--submenu").attr("data-num", i);
 }); //end each
