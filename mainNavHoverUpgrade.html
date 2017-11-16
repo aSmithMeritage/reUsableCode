@@ -1557,27 +1557,6 @@ Click below for important details and information.</p>
 		}
 	});
 </script>-->
-
-<!--
-
-@media screen and (min-width: 64em)
-
-nav.nav--main .nav--bottom .nav--submenu {
-    position: absolute;
-    z-index: 3;
-    top: 100%;
-    left: 0;
-    display: block;
-    /* visibility: hidden; */
-    width: 100%;
-    max-height: auto;
-    transition: max-height 0.3s ease-in-out, opacity 0.3s ease;
-    text-align: center;
-    /* opacity: 0; */
-    background-color: #014a87;
-    font-family: "futura-pt", sans-serif;
-}
--->
 <style>
 
 
@@ -1598,7 +1577,7 @@ nav.nav--main .nav--bottom .nav--submenu {
 }
 
 nav.nav--main .nav--bottom li.nav--menu-item.dropdown--trigger.hideNav a::before, 
-nav.nav--main .nav--bottom li.nav--menu-item.dropdown--trigger.showNav ul.vertical.nav--submenu.hideNav {
+nav.nav--main .nav--bottom li.nav--menu-item.dropdown--trigger.hideNav ul.vertical.nav--submenu.hideNav {
     visibility: hidden!important;
     opacity:0!important;
     display:none!important;
@@ -1626,7 +1605,7 @@ $(".dropdown--trigger").mouseover(function() {
     $(this).addClass("showNav");
 });//end mouseover
 $(document).mousemove(function(e) {
-    $(".mouseLocation").html("mouse Y location: " + (e.pageY - window.pageYOffset));
+    $(".mouseLocation").html("mouse Y location: " + (e.pageY - window.pageYOffset));/*just here temporarily for dev*/
     if ((e.pageY - window.pageYOffset) <= 250 || (e.pageY - window.pageYOffset) == undefined) {
         allSubNavs.removeClass("showNav").addClass("hideNav");
         $("nav.nav--main .nav--bottom .nav--submenu[data-num='" + activeMain + "']").removeClass("hideNav").addClass("showNav");
